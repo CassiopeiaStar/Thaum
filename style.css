@@ -1,0 +1,12 @@
+body {
+    background: #2e2c3b;
+    color: #c1e5ea;
+    /* text-align: center; */
+
+}
+
+h1 {
+    color: #2e2c3b;
+    text-shadow: 2px 2px 4px #8f3da7;
+    padding-left: 20px;
+}

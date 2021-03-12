@@ -1,0 +1,131 @@
+#+TITLE: 7drl-2021 Design
+
+
+* Map
+** 9x9 grid (or some other limitation of space)
+###########
+#.........#
+#.###.###.#
+#.........#
++@###.###.#
+#.........#
+#.###.###.#
+#.........#
+#.###.###.#
+#.........#
+######+####
+** Each map has an exit, you can go directly to the exit if you like, but you would miss out on the rewards
+** Enemies get harder and more frequent with each room
+* Spells
+Spells will either be on a cooldown or have a limited number of charges or some combination of the two.  This will be determined after some playtesting.
+** Magic missile
+All players start with this spell. Does damage to target in line of sight.
+** Component Creation Table
+Other than Magic Missile, players will need to create spells by combining two different spell components.
+|-----------+---------------+------------+-----------+------------+---------------+------------|
+| Component | Rose petal    | Glass      | String    | Moth wing  | Hand Mirror   | Candle     |
+| Aspect    | Fire          | Ice        | Ranged    | Mutagenic  | Summon        | Hex        |
+|-----------+---------------+------------+-----------+------------+---------------+------------|
+| Fire      | X             | healing    | fireball  | Irradiate  | Conjure Flame | Flash      |
+| Ice       | healing       | X          | Ice Ray   | Freeze     | Ice Sprite    | slow       |
+| Ranged    | fireball      | Ice Ray    | X         | Teleport   | enslave       | Confusion  |
+| Mutagenic | Irradiate     | Freeze     | Teleport  | X          | Polymorph     | Ghost Form |
+| Summon    | Conjure Flame | Ice Sprite | Enslave   | Polymorph  | X             | drain      |
+| Hex       | Flash         | slow       | Confusion | Ghost Form | drain         | X          |
+** Healing
+Heals one hitpoint
+** Fireball
+Shoots a fireball in a straight line. Does damage in a 3x3 square around the target. Can damage the player.
+** Irradiate
+Deals damage in the 8 adjacent squares around the player.
+** Conjure Flame
+Places a flame cloud on a target square anywhere on the board.  Monsters will not cross the flame cloud.  If placed directly on a monster, it will damage them as long as they are on the square.
+** Flash
+Stuns all monsters on the floor for a couple of turns.
+** Ice Ray
+damages all enemies in a line dealing cold damage.
+** Freeze
+Freezes an adjacent enemy. Frozen enemies remain frozen until damaged.
+** Ice Sprite
+Creates a friendly sprite that fights for you
+** Slow
+Slows a target enemy skipping every other turn.
+** Teleport
+Teleports the player to target location.
+** Enthrall
+Temporarily enthralls an adjacent enemy to fight for you.
+** Confusion
+Temporarily causes all enemies in line of sight to move in a random direction.
+** Polymorph
+Transforms target into a random enemy type.
+** Ghost Form
+Allows you to temporarily move through walls.
+** Drain
+Damages an adjacent enemy and heals you.
+* Enemies
+I have two groups of enemy types.  One is essential, the second is if I have the time.
+** Essential
+*** Giant rat (R)
+1 health, no resistances
+*** Kobold (K)
+2 health, no resistances
+*** Gnoll (G)
+3 health, no resistances
+*** Ogre (O)
+4 health, no resistances
+** Extra
+*** Fire Bat (F)
+1 health, fire resist, vulnerable to cold (Not that it super matters)
+*** Simulacrum (S)
+2 health, cold resist, vulnerable to fire
+*** Magma Golumn (M)
+3 health, fire resist, Vulnerable to cold
+*** Yeti (Y)
+4 health, cold resist, Vulnerable to fire
+** Table
+|        | Monster      | Rating | Character | Color  | Health | Resistances | Vulnerablilities |
+|--------+--------------+--------+-----------+--------+--------+-------------+------------------|
+| Basic  | Giant Rat    |      1 | R         | Grey   |      1 | -           | -                |
+|        | Kobold       |      2 | K         | Blue   |      2 | -           | -                |
+|        | Gnoll        |      3 | G         | Yellow |      3 | -           | -                |
+|        | Ogre         |      4 | O         | White  |      4 | -           | -                |
+|--------+--------------+--------+-----------+--------+--------+-------------+------------------|
+| Extras | Fire bat     |      1 | B         | Red    |      1 | Fire        | Cold             |
+|        | Simulacrum   |      2 | S         | Blue   |      2 | Cold        | Fire             |
+|        | Magma Golumn |      3 | M         | Red    |      3 | Fire        | Cold             |
+|        | Yeti         |      4 | Y         | White  |      4 | Cold        | Fire             |
+|--------+--------------+--------+-----------+--------+--------+-------------+------------------|
+
+* Tasks
+** create enemies
+DEADLINE: <2021-03-12 Fri>
+*** basic
+DEADLINE: <2021-03-08 Mon>
+*** extra
+DEADLINE: <2021-03-12 Fri>
+** HUD
+DEADLINE: <2021-03-11 Thu>
+*** Player Health
+DEADLINE: <2021-03-08 Mon>
+*** Enemy Health
+DEADLINE: <2021-03-08 Mon>
+*** messages
+DEADLINE: <2021-03-08 Mon>
+*** spells names/charges
+DEADLINE: <2021-03-11 Thu>
+*** components list
+DEADLINE: <2021-03-11 Thu>
+** create enemy difficulty system
+DEADLINE: <2021-03-08 Mon>
+** create spellcrafting system
+DEADLINE: <2021-03-09 Tue>
+*** components
+DEADLINE: <2021-03-09 Tue>
+*** combine components in system
+DEADLINE: <2021-03-09 Tue>
+** create spells
+DEADLINE: <2021-03-10 Wed>
+*** effects
+DEADLINE: <2021-03-10 Wed>
+*** animations
+DEADLINE: <2021-03-10 Wed>
