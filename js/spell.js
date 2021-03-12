@@ -7,8 +7,8 @@ export class SpellsSystem {
     constructor() {
         this.slots = {
             ['q']: 'magic missile',
-            ['w']: 'conjure flame',
-            ['e']: 'ice sprite',
+            ['w']: '(empty)',
+            ['e']: '(empty)',
             ['r']: '(empty)',
             ['a']: '(empty)',
             ['s']: '(empty)',
@@ -60,12 +60,13 @@ export class SpellsSystem {
                         }
                         if(k.code === "Enter" || k.code === "Space") {
                             game.data.player.heal(2,game.data);
-                            game.awaitingPlayerAction = false;
+                            game.data.awaitingPlayerAction = false;
                             game.drawGame({});
                             return true;
                         }
 
                     }
+
                 }
             },
             ['fireball']: {
@@ -156,6 +157,8 @@ export class SpellsSystem {
                         if (enemy) {
                             if(enemy.freeze(game)) {
                                 game.data.msgs.push("The "+enemy.name+" freezes in place");
+                            } else {
+                                game.data.msgs.push("The "+enemy.name+" pt")
                             }
                         }
                     }
@@ -187,6 +190,7 @@ export class SpellsSystem {
                 }
 
             },
+            // TODO fix conjure flame
             ['conjure flame']:{
                 cast: async function(game) {
                     let t = function(key,hl,selection) {
@@ -244,7 +248,7 @@ export class SpellsSystem {
                             game.scheduler.add(sprite,true);
                             let spriteSchedule = game.scheduler._queue._events.heap.pop();
                             game.scheduler._queue._events.heap.unshift(spriteSchedule);
-                            console.log(game.scheduler._queue._events.heap);
+                            // console.log(game.scheduler._queue._events.heap);
 
                             game.data.enemies.push(sprite);
                             game.data.msgs.push("You summon a friendly Ice Sprite");
@@ -530,7 +534,7 @@ async function castInDirection(game,name,targetingFunction,spellFunction) {
         if (numpadConverter[k.code]) {
             key = numpadConverter[k.code];
         }
-        console.log(key);
+        // console.log(key);
 
         if(dir[key]) {
             selection = targetingFunction(key,highlighting);
@@ -590,7 +594,7 @@ async function castWithSmiteTargeting(game,name,targetingFunction,spellFunction)
         if (numpadConverter[k.code]) {
             key = numpadConverter[k.code];
         }
-        console.log(key);
+        // console.log(key);
         if(dir[key]) {
             selection = targetingFunction(key,highlighting,selection);
 

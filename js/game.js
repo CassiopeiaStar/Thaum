@@ -45,10 +45,10 @@ class Game {
                 }
                 if(!actor) {break;};
                 let stateChanges = await actor.act(this);
-                stateChanges && console.log("State Change: "+stateChanges);
+                // stateChanges && console.log("State Change: "+stateChanges);
                 if( stateChanges === "newLevel" ) {
                     this.data.difficulty +=1;
-                    if (this.data.difficulty <= 20) {
+                    if (this.data.difficulty <= 30) {
                         this.newLevel();
                     } else {
                         this.winner = true;
@@ -59,7 +59,7 @@ class Game {
                 if( stateChanges === "gameOver" ) {break;}
                 if( stateChanges === "craftingMenu" ) {
                     let spellName = await this.craftingMenu();
-                    console.log("spellName: "+spellName);
+                    // console.log("spellName: "+spellName);
                     if (spellName !== undefined) {await this.spellAssignMenu(spellName)};
                 }
 
@@ -129,7 +129,7 @@ class Game {
             enemy.drawHealthBar(x,y+4+i,this.display);
 
             if(enemy.isFrozen) {
-                this.display.draw(x+6,y+4+i,'F',myColors['blue']);
+                this.display.draw(x+11,y+4+i,'F',myColors['blue']);
             }
             if(enemy.isFriendlyOrBefriended()) {
                 this.display.draw(x+7,y+4+i,'F',myColors['red']);
@@ -406,9 +406,9 @@ class Game {
                     this.data.cBag[c1]--;
                     this.data.cBag[c2]--;
 
-                    console.log("C1: "+c1);
-                    console.log("C2: "+c2);
-                    console.log(spellFactory.craft(c1,c2));
+                    // console.log("C1: "+c1);
+                    // console.log("C2: "+c2);
+                    // console.log(spellFactory.craft(c1,c2));
                     return spellFactory.craft(c1,c2)
                 } else {
                     msg = "You need to slect two spell components first."+
@@ -481,9 +481,9 @@ class Game {
                 } else {
                     msg = '';
                 }
-            } else {
-                console.log(k.key);
             }
+
+
         }
     }
 
@@ -506,7 +506,7 @@ class Game {
     }
 
     newLevel() {
-        console.log("Creating new level");
+        // console.log("Creating new level");
         this.scheduler.clear();
 
         let playerStart = this.data.map.newLevel();
@@ -533,7 +533,7 @@ class Game {
         };
 
         while (difficulty > sumDifficulty()) {
-            let sizeOfMonster = Math.min(4,difficulty-sumDifficulty());
+            let sizeOfMonster = Math.min(6,difficulty-sumDifficulty());
 
             let loc = this.getEmptyTile();
             let new_guy = enemyFactory[sizeOfMonster](loc.x,loc.y);
@@ -550,7 +550,7 @@ class Game {
             let y = Math.floor(Math.random() * 9) + 1;
 
             if (!this.isBlocked(x,y)) {
-                console.log("Returning empty tile after "+(t+1)+" tries");
+                // console.log("Returning empty tile after "+(t+1)+" tries");
                 return {x,y};
             }
         }

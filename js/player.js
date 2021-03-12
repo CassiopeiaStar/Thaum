@@ -138,9 +138,9 @@ let keyMap = {
     'Period': (game) => { return game.data.player.wait(game.data); },
     'Numpad5': (game) => { return game.data.player.wait(game.data); },
 
-    'KeyP': (game) => {
-        game.data.player.health = 9;
-    }
+    // 'KeyP': (game) => {
+    //     game.data.player.health = 9;
+    // }
     // this is some weird spaghetti shit but whatever
     // 'KeyQ': async (game) => {
     //     await game.data.spells.castKey(game,'q');

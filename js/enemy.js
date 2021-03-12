@@ -64,9 +64,11 @@ export class Enemy extends Entity {
         }
     }
 
-    // TODO fix
     actFriendly(game) {
         let path = this.closestEnemyPath(game);
+
+        console.log("Path for: "+this.name);
+        console.log(path);
         if(path !== null) {
             if( path.length > 2) {
                 this.x = path[1][0];
@@ -81,10 +83,11 @@ export class Enemy extends Entity {
         }
     }
 
-    // TODO fix
     actAggresively(game) {
         let gameData = game.data;
         let path = this.closestFriendlyPath(game);
+        console.log("Path for: "+this.name);
+        console.log(path);
         if(path.length > 2) {
             this.x = path[1][0];
             this.y = path[1][1];
@@ -98,6 +101,8 @@ export class Enemy extends Entity {
                 gameData.msgs.push("You've been hit by a "+this.name);
             }
         }
+
+        // TODO if path is blocked, try to walk towards the player anyways.
     }
 
     aimlessWander(game) {
@@ -192,7 +197,7 @@ export class Enemy extends Entity {
         for(let enemy of game.data.enemies) {
             if(enemy && !enemy.equals(this) && !enemy.isFriendlyOrBefriended()) {
                 let path = getPath(game,this.x,this.y,enemy.x,enemy.y);
-                if (path && (bestPath === null || bestPath.length > path.length)) {
+                if ((path && path.length > 0) && (bestPath === null || bestPath.length > path.length)) {
                     bestPath = path;
                 }
             }
@@ -204,13 +209,16 @@ export class Enemy extends Entity {
         let bestPath = null;
         //test player path first
         let path = getPath(game,this.x,this.y,game.data.player.x,game.data.player.y);
-        if (path && (bestPath === null || bestPath.length > path.length)) {
+        if ((path && path.length >0) && (bestPath === null || bestPath.length > path.length)) {
             bestPath = path;
         }
         for(let enemy of game.data.enemies) {
             if(enemy && !enemy.equals(this) && enemy.isFriendlyOrBefriended()) {
                 let path = getPath(game,this.x,this.y,enemy.x,enemy.y);
-                if (path && (bestPath === null || bestPath.length > path.length)) {
+                if ((path && path.length > 0) && (bestPath === null || bestPath.length > path.length)) {
+                    console.log("Swapping paths: ");
+                    console.log(bestPath);
+                    console.log(path);
                     bestPath = path;
                 }
             }
