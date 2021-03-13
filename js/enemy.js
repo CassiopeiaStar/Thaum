@@ -99,7 +99,7 @@ export class Enemy extends Entity {
                 gameData.msgs.push("You've been hit by a "+this.name);
             }
         } else {
-            aimlessWander(game);
+            this.aimlessWander(game);
         }
 
         // TODO if path is blocked, try to walk towards the player anyways.
@@ -141,8 +141,9 @@ export class Enemy extends Entity {
 
         if(!resistant) {
             this.health -= ammount;
+            return true;
         } else {
-            gameData.msgs.push("The "+this.name+" resists the "+damageType+" damage.");
+            return false;
         }
     }
 
@@ -167,8 +168,8 @@ export class Enemy extends Entity {
 
     freeze(game) {
         let resistant = false;
-
-        for (let r in this.resistance) {
+        for (let r of this.resistances) {
+            console.log("Comparing: "+r);
             if (r === 'ice') {
                 resistant = true;
             }
@@ -178,7 +179,7 @@ export class Enemy extends Entity {
             this.isFrozen = true;
             return true;
         } else {
-            game.data.msgs.push("The "+this.name+" resists freezing.");
+            // game.data.msgs.push("The "+this.name+" resists freezing.");
             return false;
         }
     }

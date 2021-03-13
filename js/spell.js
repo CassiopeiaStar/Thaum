@@ -7,10 +7,10 @@ export class SpellsSystem {
     constructor() {
         this.slots = {
             ['q']: 'magic missile',
-            ['w']: '(empty)',
-            ['e']: '(empty)',
-            ['r']: '(empty)',
-            ['a']: '(empty)',
+            ['w']: 'fireball',
+            ['e']: 'irradiate',
+            ['r']: 'ice ray',
+            ['a']: 'freeze',
             ['s']: '(empty)',
             ['d']: '(empty)',
             ['f']: '(empty)',
@@ -88,8 +88,12 @@ export class SpellsSystem {
                         for (let tile of selection) {
                             let enemy = getEnemyAt(game,...tile);
                             if (enemy) {
-                                enemy.damage(game.data,2,"fire");
-                                game.data.msgs.push("The "+enemy.name+" is hit by the explosion");
+                                let confirmedDamage = enemy.damage(game.data,2,"fire");
+                                if (confirmedDamage) {
+                                    game.data.msgs.push("The "+enemy.name+" is hit by the explosion");
+                                } else {
+                                    game.data.msgs.push("The "+enemy.name+" resists the fire damage.");
+                                }
                             }
                             if(tile[0] === game.data.player.x && tile[1] === game.data.player.y) {
                                 game.data.player.damage(1);
@@ -116,8 +120,12 @@ export class SpellsSystem {
                         for (let tile of selection) {
                             let enemy = getEnemyAt(game,...tile);
                             if (enemy) {
-                                enemy.damage(game.data,2,"ice");
-                                game.data.msgs.push("The "+enemy.name+" is seared by the ice ray");
+                                let confirmedDamage = enemy.damage(game.data,2,"ice");
+                                if (confirmedDamage) {
+                                    game.data.msgs.push("The "+enemy.name+" is seared by the ice ray");
+                                } else {
+                                    game.data.msgs.push("The "+enemy.name+" resists the ice damage.");
+                                }
                             }
                         }
                     };
@@ -136,8 +144,12 @@ export class SpellsSystem {
                         for (let tile of selection) {
                             let enemy = getEnemyAt(game,...tile);
                             if (enemy) {
-                                enemy.damage(game.data,2,"fire");
-                                game.data.msgs.push("The "+enemy.name+" is scorched by the radiation");
+                                let confirmedDamage = enemy.damage(game.data,2,"fire");
+                                if (confirmedDamage) {
+                                    game.data.msgs.push("The "+enemy.name+" is scorched by the radiation.");
+                                } else {
+                                    game.data.msgs.push("The "+enemy.name+" resists the fire damage.");
+                                }
                             }
                         }
                     };
@@ -158,7 +170,7 @@ export class SpellsSystem {
                             if(enemy.freeze(game)) {
                                 game.data.msgs.push("The "+enemy.name+" freezes in place");
                             } else {
-                                game.data.msgs.push("The "+enemy.name+" pt")
+                                game.data.msgs.push("The "+enemy.name+" resists the freezing touch")
                             }
                         }
                     }
@@ -370,7 +382,7 @@ export class SpellsSystem {
                             let enemy = getEnemyAt(game,...tile);
 
                             if (enemy) {
-                                enemy.confusedForTurns += 3;
+                                enemy.confusedForTurns += 5;
                                 game.data.msgs.push("The "+enemy.name+"'s eyes glaze over.");
                             }
                         }
