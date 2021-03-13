@@ -7,10 +7,10 @@ export class SpellsSystem {
     constructor() {
         this.slots = {
             ['q']: 'magic missile',
-            ['w']: 'fireball',
-            ['e']: 'irradiate',
-            ['r']: 'ice ray',
-            ['a']: 'freeze',
+            ['w']: '(empty)',
+            ['e']: '(empty)',
+            ['r']: '(empty)',
+            ['a']: '(empty)',
             ['s']: '(empty)',
             ['d']: '(empty)',
             ['f']: '(empty)',
