@@ -117,10 +117,11 @@ class Game {
     //
     drawHUD(x,y) {
         this.display.drawText(x,y,"Player Health");
-        this.display.draw(x,y+1,'[',myColors['white']);
-        this.display.draw(x+10,y+1, ']',myColors['white']);
+        this.display.draw(x,y+1,'@','#fff');
+        this.display.draw(x+1,y+1,'[',myColors['white']);
+        this.display.draw(x+11,y+1, ']',myColors['white']);
         for( let i = 0; i < this.data.player.health; i++ ) {
-            this.display.draw(x+1+i,y+1,'*',myColors['green']);
+            this.display.draw(x+2+i,y+1,'*',myColors['green']);
         }
 
         this.display.drawText(x,y+3,"Enemy Health");
@@ -234,7 +235,7 @@ class Game {
             if(k.key === '?') {
                 await this.controls();
             }
-            if(k.code === "Enter") {
+            if(k.key === "Enter") {
                 break;
             }
 
@@ -243,14 +244,14 @@ class Game {
 
     async intro() {
         let messages = [
-            "You are a fledgeling Thaumaturge who has set out on a trial to fufill your dream "+
+            "You are a fledgeling Thaumaturge who has set out on a trial to fulfill your dream "+
             "to become the greatest wizard the world has ever known. ",
 
             "The Chambers of Magic before you hold great secrets and great dangers. "+
             "There are few who venture into these chambers, and even fewer that return, "+
             "but all who emerge do so with an unquestionably deep understanding of the magical arts.",
 
-            "You have learned but one spell, the magic missle, "+
+            "You have learned but one spell, the magic missile, "+
             "and believe the Chambers of Magic should be a quick "+
             "way to learn more and achieve greatness...",
         ];
@@ -399,7 +400,7 @@ class Game {
                 break;
             }
 
-            if (k.code === "Enter" || k.code === "Space") {
+            if (k.key === "Enter" || k.code === "Space") {
                 if (selection.length === 2) {
                     let c1 = componentsList[selection[0]-1];
                     let c2 = componentsList[selection[1]-1];
@@ -475,7 +476,7 @@ class Game {
 
                 let confirmation = await readKey();
 
-                if (confirmation.code === "Enter" || confirmation.code === "Space") {
+                if (confirmation.key === "Enter" || confirmation.code === "Space") {
                     this.data.spells.slots[k.key] = spell;
                     break;
                 } else {

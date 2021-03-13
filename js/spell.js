@@ -522,7 +522,7 @@ async function castInDirection(game,name,targetingFunction,spellFunction) {
             game.data.msgs.push("Okay...nevermind");
             break;
         }
-        if (selection !== null && (k.code === "Enter" || k.code === "Space")) {
+        if (selection !== null && (k.key === "Enter" || k.code === "Space")) {
 
             game.data.awaitingPlayerAction = false;
             spellFunction(selection);
@@ -559,7 +559,7 @@ async function castWithConfirmation(game,name,targetingFunction,spellFunction) {
             game.data.msgs.push("Okay...nevermind");
             break;
         }
-        if (k.code === "Enter" || k.code === "Space") {
+        if (k.key === "Enter" || k.code === "Space") {
             game.data.awaitingPlayerAction = false;
             spellFunction(selection);
             casted = true;
@@ -582,7 +582,7 @@ async function castWithSmiteTargeting(game,name,targetingFunction,spellFunction)
             game.data.msgs.push("Okay...nevermind");
             break;
         }
-        if (selection !== null && (k.code === "Enter" || k.code === "Space")) {
+        if (selection !== null && (k.key === "Enter" || k.code === "Space")) {
 
             game.data.awaitingPlayerAction = false;
             spellFunction(selection);

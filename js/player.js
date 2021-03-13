@@ -18,8 +18,9 @@ export class Player extends Entity {
         let stateChange = null;
 
         while (waiting) {
-            console.log("Awaiting player action");
+            // console.log("Awaiting player action");
             let k = await readKey();
+            // console.log(k);
             
             if (keyMap[k.code]){
                 stateChange = await keyMap[k.code](game);

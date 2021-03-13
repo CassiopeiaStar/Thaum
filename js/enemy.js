@@ -67,8 +67,8 @@ export class Enemy extends Entity {
     actFriendly(game) {
         let path = this.closestEnemyPath(game);
 
-        console.log("Path for: "+this.name);
-        console.log(path);
+        // console.log("Path for: "+this.name);
+        // console.log(path);
         if(path !== null) {
             if( path.length > 2) {
                 this.x = path[1][0];
@@ -86,12 +86,10 @@ export class Enemy extends Entity {
     actAggresively(game) {
         let gameData = game.data;
         let path = this.closestFriendlyPath(game);
-        console.log("Path for: "+this.name);
-        console.log(path);
-        if(path.length > 2) {
+        if(path && path.length > 2) {
             this.x = path[1][0];
             this.y = path[1][1];
-        } else if (path.length === 2) {
+        } else if (path && path.length === 2) {
             let enemy = getEnemyAt(game,...path[1]);
             if (enemy) {
                 enemy.damage(game.data,1,"physical");
@@ -100,6 +98,8 @@ export class Enemy extends Entity {
                 gameData.player.damage(1,this.name,gameData);
                 gameData.msgs.push("You've been hit by a "+this.name);
             }
+        } else {
+            aimlessWander(game);
         }
 
         // TODO if path is blocked, try to walk towards the player anyways.
@@ -216,9 +216,9 @@ export class Enemy extends Entity {
             if(enemy && !enemy.equals(this) && enemy.isFriendlyOrBefriended()) {
                 let path = getPath(game,this.x,this.y,enemy.x,enemy.y);
                 if ((path && path.length > 0) && (bestPath === null || bestPath.length > path.length)) {
-                    console.log("Swapping paths: ");
-                    console.log(bestPath);
-                    console.log(path);
+                    // console.log("Swapping paths: ");
+                    // console.log(bestPath);
+                    // console.log(path);
                     bestPath = path;
                 }
             }
