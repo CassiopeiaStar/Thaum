@@ -602,6 +602,11 @@ class Game {
 
 const readKey = () => new Promise(resolve => window.addEventListener('keydown', resolve, {once:true}));
 
+window.addEventListener('keydown', function(e) {
+    if((e.code === "Space" || e.code === "Backspace") && e.target == document.body) {
+        e.preventDefault();
+    }
+})
 
 let game = new Game();
 game.run();

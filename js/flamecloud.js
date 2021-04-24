@@ -4,7 +4,7 @@ import {myColors} from './colors.js';
 export class FlameCloud extends Entity {
     constructor(x,y) {
         super(x,y,'*',myColors['red'])
-        this.timer = 5;
+        this.timer = 8;
     }
 
     async act(game) {
